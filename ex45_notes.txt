@@ -93,7 +93,7 @@ Hierarchy
 	- save_state 
 * Rooms
 	+ enter
-	- Bedroom
+	X Bedroom 
 	- KoiPond
 	- Library
 	- Basement

@@ -135,7 +135,7 @@ class LaserWeaponArmory(Scene):
         print "get the bomb. The code is 3 digits."
         
 		# sets code to a string of 3 integers, selected randomly using randint()
-		code = "%d%d%d" % (randin(1,9), randint(1,9), randint(1, 9))
+		code = "%d%d%d" % (randint(1,9), randint(1,9), randint(1, 9))
 		# sets guess variable to user input
         guess = raw_input("[keypad]> ")
 		# keeps track of the number of times the user has guessed

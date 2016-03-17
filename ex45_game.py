@@ -15,6 +15,7 @@ class Engine(object):
 
     def play(self):
         user = Player()
+
 		
 class Player(object):
 
@@ -27,6 +28,7 @@ class Player(object):
     def list_inventory(self):
         for i in inventory:
             print "%s" % i
+
 
 class Bedroom(Room):
 	
@@ -41,10 +43,10 @@ class Bedroom(Room):
         while not key:
             if answer == "bed":
 		        print "A thin mattress on a metal frame. Not particularly comfortable, "
-		        print "and not particularly interesting either."
+		        print "and not particularly interesting either.\n"
 		        answer = raw_input("> ")
             elif answer == "door":
-				print "No luck - the door is locked. You're not escaping that easy!"
+				print "No luck - the door is locked. You're not escaping that easy!\n"
 				answer = raw_input("> ")
             elif answer == "desk":
 		        print "A boring wooden desk, just like the kind you had in school..."
@@ -63,13 +65,29 @@ class Bedroom(Room):
             return 'koi_pond'
         else: 
             print "This should never appear either."
+
 			
 class KoiPond(Room):
 
     def enter(self):
-	    pass
+        print "You find yourself in what appears to be an indoor garden of some sort... You are surrounded by"
+        print "decorative trees and flowers. There is a bridge over a small koi pond, and on the other side"
+        print "there is a door. Next to the door is a keypad. It seems to be asking for a code..."
+        koi = randint(1,9)
+		answer = raw_input("> ")
+		pond = False
+		# if the code matches the number of koi, then we can proceed
+		# otherwise you get three chances before death
+		# are we including a check for if the user has looked at the pond or not?
+		# i might have to put the "where to" in its own function??
 		
-
+		while not pond:
+		    if answer == "pond":
+		        print "You stand atop the bridge and look down into the koi pond. You count %d fish..." % koi
+				pond = True
+		    elif answer == "door":
+		        print "The door needs a code! What could it be? Look around..."
+				answer = raw_input("> ")
 class Library(Room):
 
     def enter(self):
