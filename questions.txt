@@ -1,0 +1,136 @@
+THINGS TO REMEMBER
+
+- Accessing Pydoc - on windows, python -m pydoc (term)
+
+(ex 16)
+Methods:
+	close() - closes the file. like file-> save
+	read() - reads the contents of the file. Results can be assigned 
+		to a variable
+	readline() - Reads just one line of text.
+	truncate() - empties the file. Watch out!
+	write('stuff') - writes 'stuff' to the file. 
+		writes the parameter to the file.
+
+(ex 16)	
+Buffers(?) for open()
+	'w' - write (also truncates any existing content)
+	'r' - read (default for open)
+	'a' - append
+	
+	all of these can also take '+' (eg 'w+', 'a+' etc)
+		which opens the file in both read and write mode
+		
+(ex17)
+	echo "This is a test file." > test.txt
+	puts string into test.txt
+	
+(ex18)
+FUNCTION CHECKLIST
+1. Does it start with 'def'?
+2. Does the name only include characters and underscores?
+3. Is there an open parenthetical after the function name?
+4. Do the arguments follow the open parenthesis, and are separated by commas?
+5. Is each argument name unique?
+6. Did you close parentheses followed by colon? ):
+7. Are all lines of associated code indented 4 spaces?
+8. Did you dedent to exit the function?
+
+(ex20)
+
+	f.seek() - a function we can call on a file object. 
+		moves to the specified file position IN BYTES!!!
+		so f.seek(0)  brings us to the first BYTE, the start of the file.
+	f.readline() - everytime we do this, it reads a line from the file
+	and then  moves the 'read head' to right after the '\n' that ends the line.
+	It includes this \n in its return, so add a comment
+
+(ex 31)
+	when dealing with lists, remember:
+	ordinal = ordered, 1st; cardinal = cards at random, 0.
+	
+(ex 36)
+	
+RULES FOR IF-STATEMENTS
+1. every if-statement MUST have an else
+2. if this else should never run because it doesn't make sense, then you 
+MUST use a 'die' function in the else statement that prints out an error message, and then dies (like we did in ex 35)
+3. Never nest if-statements more than two deep, and always try to do them one deep.
+4. Treat if-statements like paragraphs, where each if-elif-else grouping 
+is like a set of sentences. Put blank lines before and after.
+5. Your boolean tests should be simple. If they are complex,  
+move their calculations to variables earlier in the function and use a good name for that variable
+
+RULES FOR LOOPS (WHILE / FOR)
+1. Use a while-loop only to loop forever, and that means almost never. (PYTHON ONLY)
+2. Use a for-loop over all other kinds of looping, ESPECIALLY if there is a fixed or limited number of things to loop over
+
+
+THINGS YOU CAN DO TO LISTS
+- append(x) - add an item to the end of the list
+- extend(list) - extends the list by appending all the items in the given list
+- insert(i, x) - insert an item at a given position (i - index, x - item)
+- remove(x) - remove the first item from list whose value is x
+- pop([i]) - remove the item at the given position in the list and return it. If no index given, removes last item in list.
+- index(x) - returns the index of the first item whose value is x
+- count(x) - return the number of times x appears in the list
+- sort() - sort the items of the list in place
+- reverse() - reveres the elements of the list, in place
+
+WHEN TO USE DICTIONARIES (ex 39)
+1. You have to retrieve things based on some identifier, like names, addresses, or anything that can be a key
+2. You don't need things to be in order. 
+Dictionaries do not normally have any notion of order, so you have to use a list for that.
+3. You are going to be adding and removing elements and their keys. 
+4. If you have a non-numeric key, use dict.
+
+Common Python Pattern:
+1. Take a key=value style container
+2. Get something out of it by the key's name.
+
+ex40 - Classes
+Instantiate (create) a class by calling the class like it's a function:
+	thing = MyClass()
+	thing.myclassfunction()
+	
+ex 44 - Inheritance / Composition
+
+INHERITANCE V. COMPOSITION
+1. Avoid multiple inheritance at all costs, as it's too complex to be reliable.
+	If you're stuck with it, then be prepared to know the class hierarchy
+	and spend time finding where everything is coming from.
+2. Use composition to package code into modules that are used
+	in many different unrelated places and situations
+3. Use inheritance only when there are clearly related resuable pieces
+	of code that fit under a single common concept, or if you have to
+	because of something you're using. 
+?????????????????????????????????????????????????????????????????????
+
+from lesson 3 or so (appears multiple times)
+ - sometimes my floating integers don't return as floating integers in when they're in strings??
+ 
+from lesson 8
+	- line 32 returns as being in double quotes in terminal... but everything else is in single quotes?
+		why is this the only one in double quotes??
+		
+from lesson 16
+	- so I can write to a file, but I can't then read it afterwards...
+	I keep getting errors that the file either isn't open, or it's not an object i can open??
+	what's happening here?
+
+from lesson 17 - ANSWERED
+	- If I combine open() and read() into one line, do I still have to 
+		close the file? I get an error when I try
+		!!! BECAUSE !!!
+		if calling read() automatically closes the open file by python
+		
+from lesson 20
+	- does the letter 'f' have any real significance in all these function calls
+		or is it just convention to use f here?
+
+from lesson 21 (and relating to lesson 3)
+	- I'm still having issues with getting my floating points to show up in functions... sometimes they do,
+	and sometimes they don't, but I can't really tell why? 
+	In the exercise, I had to switch around (34.0/100.0) to (100.0/34.0) and then it worked?
+	
+	

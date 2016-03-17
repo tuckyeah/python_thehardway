@@ -1,0 +1,100 @@
+"""
+	You're a contestant on a new kind of dating game. You are
+	placed in a room with two-three doors, each door representing some
+	quality of the person waiting at the end of the maze. Follow
+	your heart to find your true love!
+	
+	The game will have text outputs that present the user with choices
+	and there are no 'wrong' choices - any combination will lead you to
+	one of three possible contestants. 
+	
+	The game will involve an engine that runs a map full of rooms
+	Each room will print its own description and a description of the doors
+	and then it will tell the engine which room to run next out of the
+	map/tree.
+"""
+
+Final Contestants: Dana Scully, Marilyn Manson, Ryan Gosling
+
+1st room: Male / Female
+2nd room: Ideal date?
+3rd room: What kind of dessert would you most like?
+4th room: 
+
+--- OR ---
+
+You wake up locked in a single room, with just a desk and a bed. You have no 
+idea how you got here, and now you have to escape! The game will have
+four or five rooms, each with a puzzle to be solved in order to progress.
+Certain actions will result in the user's death.
+
+The actions available to you will be similar to text style adventure games (look, walk, etc)
+Each room will print its description and then prompt the user to explore.
+Once the puzzle is solved, it will tell the engine which room to go to next.
+
+The ENGINE will also randomly select the next room - so we have a set start room
+(bedroom) and set end room (ornate), but the rooms in between can come in any order
+Descriptions of each scene:
+
+Bedroom: This is the starting point, and the user has to find the key hidden
+in the desk to unlock the door.
+
+KoiPond: User has to enter the right door - the same number as the number
+of fish in the pond.
+
+Library: The user has to find the name of the correct book written
+on a piece of paper to reveal the next door.
+
+Basement Passage: The user is blocked by a giant Turtle who asks a riddle.
+The user must guess correctly to proceed. Or he makes them guess a number?
+
+Ornately Decorated Room: The final room. To be free of this place once
+and for all, the user has three chances to roll two die and have them
+be doubles.
+
+Death: A few rooms have ways to die, and this is where it tells them as much
+and directs them back to the start or to the room they just left.
+
+Save state (?): Maybe save the players state? If this isn't too hard?
+
+List of all nouns:
+- Player
+- Bedroom
+- Key
+- Door
+- Desk
+- KoiPond Room
+- Keypad
+- Fish
+- Pond
+- Library
+- Piece of paper
+- Door
+- Book
+- basement passage
+- Giant turtle
+- riddle
+- ornate room
+- dice
+- death
+- inventory
+
+Hierarchy
+
+* Map
+	- current_room
+	- next_room
+	- (last_room?)
+* Engine
+	- play
+	- player init
+* Player (should this go under engine?)
+	- inventory (list)
+	- save_state 
+* Rooms
+	+ enter
+	- Bedroom
+	- KoiPond
+	- Library
+	- Basement
+	- Ornate Room

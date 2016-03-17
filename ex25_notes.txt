@@ -1,0 +1,51 @@
+$ import ex25
+	# imports our ex25.py module, so we can now use its functions
+	# if we don't want to type 'ex25' before every function call below,
+	# we can do 'from ex25 import *' which imports ALL functions
+	# and now we don't have to type ex25 before each function call :)
+
+$ sentence = "All good things come to those who wait."
+	# sets variable 'sentence' to the string "All good things come to those who wait"
+
+$ words = ex25.break_words(sentence)
+$ words
+	# uses the function 'break_words' to split the sentence into an array of the words
+	# then prints them, since the function doesn't include a print statement
+# returns ['All', 'good', 'things', 'come', 'to', 'those', 'who', 'wait.']
+
+$ sorted_words = ex25.sort_words(words)
+$ sorted_words
+	# uses the function 'sort_words' to sort the array 'words' we just made
+# returns ['All', 'come', 'good', 'things', 'those', 'to', 'wait.', 'who']
+
+$ ex25.print_first_word(words)
+	# calls the print_first_word function, passing the 'words' variable to it as an argument
+# returns 'All'
+
+$ ex25.print_last_word(words)
+	# calls the 'print_last_word' function, passing the 'words' variable again
+# returns 'wait.'
+
+$ words
+	#since the print_first_word & print_last_word use 'pop', 
+	# those values are no longer included in the array ('All', 'wait.')
+# prints ['good', 'things', 'come', 'to', 'those', 'who']
+
+$ ex25.print_first_word(sorted_words)
+	#prints the first word from our 'sorted_words' array
+# returns 'All'
+
+$ ex25.print_last_word(sorted_words)
+	#prints the last word from 'sorted_words' array
+# returns 'who'
+
+$ sorted_words
+	# again, since we used 'pop' in those functions, 
+	# 'All' and 'who' have been removed from the array
+# returns ['come', 'good', 'things', 'those', 'to', 'wait.']
+
+$ sorted_words = ex25.sort_sentence(sentence)
+$ sorted_words
+	# reassigns 'sorted_words' to the array returned from the 'sort_sentence' function
+	# which, since the function also includes the break_words function, returns the same array as before
+# returns ['All', 'come', 'good', 'things', 'those', 'to', 'wait.', 'who']
