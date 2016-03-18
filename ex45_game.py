@@ -31,7 +31,7 @@ class Player(object):
 
 
 class Bedroom(Room):
-	
+	#remember to add in a return here!
     def enter(self):
         print "You wake up, confused, in a strange bedroom of sorts. There is"
         print "not much by way of furniture - only a plain desk and chair, the bed"
@@ -68,26 +68,53 @@ class Bedroom(Room):
 
 			
 class KoiPond(Room):
-
+    def __init__(self):
+        self.koi = randint(1, 9)
+		
     def enter(self):
         print "You find yourself in what appears to be an indoor garden of some sort... You are surrounded by"
         print "decorative trees and flowers. There is a bridge over a small koi pond, and on the other side"
         print "there is a door. Next to the door is a keypad. It seems to be asking for a code..."
-        koi = randint(1,9)
-		answer = raw_input("> ")
-		pond = False
-		# if the code matches the number of koi, then we can proceed
-		# otherwise you get three chances before death
-		# are we including a check for if the user has looked at the pond or not?
-		# i might have to put the "where to" in its own function??
+        self.explore()
 		
-		while not pond:
-		    if answer == "pond":
-		        print "You stand atop the bridge and look down into the koi pond. You count %d fish..." % koi
-				pond = True
-		    elif answer == "door":
-		        print "The door needs a code! What could it be? Look around..."
-				answer = raw_input("> ")
+    def explore(self):
+        while True:
+            answer = raw_input("> ")
+            if answer == "pond":
+                print "You stand atop the bridge and look down into the koi pond. You count %d fish..." % self.koi
+            elif answer == "trees":
+                print "What beautiful tall trees... though you notice they seem to be concealing the sky."
+            elif answer == "flowers":
+                print "Such beautiful flowers, they smell so nice... though no clues here!"
+            elif answer == "door":
+                print "The door needs a code! Do you want to enter a number? y/n"
+                enter_code = raw_input("> ")
+                if enter_code == "n":
+                    print "Where to?"
+                    self.explore()
+                elif enter_code == "y":
+                    self.keypad()
+                else:
+                    print "please type 'y' or 'n'"
+            else:
+                print "Please enter a value I understand."
+    
+    def keypad(self):
+        guesses = 0
+        code = raw_input("[keypad]> ")
+        
+        while int(code) != self.koi and guesses < 5:
+            print "Wrong! Guess again!"
+            code = raw_input("[keypad]> ")
+            guesses += 1
+
+        if int(code) == self.koi:
+            print "You did it! The door unlocks."
+			return 'library'
+        else: 
+            print "Oh no! Too many guesses :( You are trapped here forever!"
+
+			
 class Library(Room):
 
     def enter(self):
@@ -138,5 +165,5 @@ a_map = Map('bedroom')
 a_game = Engine(a_map)
 a_game.play()
 
-test = Bedroom()
+test = KoiPond()
 test.enter()
