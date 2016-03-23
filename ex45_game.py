@@ -7,27 +7,15 @@ class Room(object):
 	    print "This shouldn't show up ever, since this is just our base class."
 	    exit(1)
 
+    def replay(self):
+	    pass
+		
 
 class Engine(object):
 
     def __init__(self, room_map):
 	    self.room_map = room_map
 
-    def play(self):
-        user = Player()
-
-		
-class Player(object):
-
-    def __init__(self):
-		self.inventory = []
-		
-    def add_inventory(self, item):
-	    self.inventory.append(item)
-		
-    def list_inventory(self):
-        for i in inventory:
-            print "%s" % i
 
 
 class Bedroom(Room):
@@ -110,35 +98,103 @@ class KoiPond(Room):
 
         if int(code) == self.koi:
             print "You did it! The door unlocks."
-			return 'library'
+            return 'library'
         else: 
             print "Oh no! Too many guesses :( You are trapped here forever!"
 
 			
 class Library(Room):
-
+    def __init__(self):
+        self.books = ["Apples to Apples", "Bananas and You", "Cranberry Delights", 
+                      "Donuts to Donuts", "Eggs Five Ways", "Fun with Flan"]
+					  
+        self.right_book = self.books[randint(0, len(self.books)-1)]
+    
     def enter(self):
-	    pass
+        print "You find yourself in a room, surrounded by shelves full of books."
+        print "There is no door in sight, but there is a collection of books in front of you"
+        print "that looks strangely different than the others. You ready the titles..."
+        print "(the correct book is: %s)" % self.right_book
+        for i in self.books:
+            print i
+
+        print "Which book do you select?"
+        ans = raw_input("[book title]> ")
+
+        while ans != self.right_book:
+            print "Nothing happens..."
+            ans = raw_input("[book title]> ")
+
+        if ans == self.right_book:
+            print "A door slides open!"
 		
 
 class Basement(Room):
+#add like a dictionary of puzzles? that can be randomized?
 
     def enter(self):
-	    pass
+        print "You descend a dark and narrow spiral stone staircase that leads deep into"
+        print "the basement of the house... Finally, you reach an empty chamber with a door"
+        print "at the other end. You rush towards it, but before you can reach it, an enormous"
+        print "turtle appears in front of you!"
+        print "'You are almost free, but before I can let you escape, you must prove you are"
+        print "wise enough to make it in the real world. You have three guesses to answer my riddle.'"
+        print "'What is the only thing you can add to a bucket to make it lighter?'"
+
+        ans = raw_input("[answer]> ")
+        guesses = 0
+
+        while ans != "a hole" and guesses < 3:
+            print "'Nope... You have %d guesses left.'" % (3-guesses)
+            guesses += 1
+            ans = raw_input("[answer]> ")
+
+        if ans == "a hole" and guesses < 3:
+            print "'Congratulations! You may pass...'"
+            print "The turtle fades away, and the door opens..."
+        else:
+            print "'I'm sorry... I can't let you go on, in good conscience. You must stay here.'"
+            exit(0)
 		
 		
 class OrnateRoom(Room):
 
     def enter(self):
-	    pass
+        print "You find yourself in another room... and here you thought you were free!"
+        print "The room is beautifully ornate, covered in gold and jewels. In the middle,"
+        print "two die sit on a raised pedestal. You have 5 chances to roll doubles and escape"
+        print "forever. Type 'r' to roll, and 'e' to exit. Ready?"
+        guesses = 0
 
-class Finished(Room):
-
-    def enter(self):
-	    pass
+        while True:
+            self.check_play(guesses)
+            guesses += 1
+			
+    def check_play(self, guesses):
+        ans = raw_input("[r/e]> ")
 		
-    def replay(self):
-	    pass
+        if ans == "r" and guesses < 5:
+            print "Number of guesses: %d" % guesses
+            self.roll_dice()
+        elif ans == "e":
+            self.enter()
+        elif guesses >= 5:
+            print "No dice (haha!) You are trapped here forever!!"
+            exit(0)
+        else:
+            print "Please print a value I understand"
+
+    def roll_dice(self):
+        die_1 = randint(1, 6)
+        die_2 = randint(1, 6)
+
+        print "You rolled a %d and a %d." % (die_1, die_2)
+
+        if die_1 == die_2:
+            print "You've won! Congrats!"
+            return 'finished'
+            exit(0)
+
 		
 class Map(object):
 	# create a dictionary of the rooms
@@ -163,7 +219,6 @@ class Map(object):
 		
 a_map = Map('bedroom')
 a_game = Engine(a_map)
-a_game.play()
 
-test = KoiPond()
+test = OrnateRoom()
 test.enter()
