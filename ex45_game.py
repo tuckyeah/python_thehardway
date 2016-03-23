@@ -9,13 +9,22 @@ class Room(object):
 
     def replay(self):
 	    pass
-		
 
+		
 class Engine(object):
 
     def __init__(self, room_map):
-	    self.room_map = room_map
+        self.room_map = room_map
 
+    def play(self):
+        current_room = self.room_map.opening_room()
+        last_room = self.room_map.next_room('finished')
+
+        while current_room != last_room:
+            next_room_name = current_room.room_getter()
+            current_room = self.room_map.next_room(next_room_name)
+
+        current_room.enter()
 
 
 class Bedroom(Room):
@@ -50,11 +59,15 @@ class Bedroom(Room):
         if key:
             print "Key in hand, you head to the door. Sure enough, the key fits in the lock,"
             print "you turn the handle and open the door..."
-            return 'koi_pond'
+            self.room_getter()
+
         else: 
             print "This should never appear either."
-
-			
+		
+    def room_getter(self):
+        val = 'koi_pond'
+        return val
+	
 class KoiPond(Room):
     def __init__(self):
         self.koi = randint(1, 9)
@@ -102,7 +115,7 @@ class KoiPond(Room):
         else: 
             print "Oh no! Too many guesses :( You are trapped here forever!"
 
-			
+	
 class Library(Room):
     def __init__(self):
         self.books = ["Apples to Apples", "Bananas and You", "Cranberry Delights", 
@@ -127,7 +140,8 @@ class Library(Room):
 
         if ans == self.right_book:
             print "A door slides open!"
-		
+            return 'basement'
+
 
 class Basement(Room):
 #add like a dictionary of puzzles? that can be randomized?
@@ -152,11 +166,12 @@ class Basement(Room):
         if ans == "a hole" and guesses < 3:
             print "'Congratulations! You may pass...'"
             print "The turtle fades away, and the door opens..."
+            return 'ornate_room'
         else:
             print "'I'm sorry... I can't let you go on, in good conscience. You must stay here.'"
             exit(0)
-		
-		
+
+
 class OrnateRoom(Room):
 
     def enter(self):
@@ -195,6 +210,13 @@ class OrnateRoom(Room):
             return 'finished'
             exit(0)
 
+
+class Finished(Room):
+
+    def enter(self):
+        print "Congratulations! You've won!"
+        return 'finished'
+
 		
 class Map(object):
 	# create a dictionary of the rooms
@@ -205,20 +227,20 @@ class Map(object):
         'koi_pond': KoiPond(),
         'library': Library(),
         'basement': Basement(),
-        'ornate_room': OrnateRoom()
+        'ornate_room': OrnateRoom(),
+        'finished': Finished()
     }
 
     def __init__(self, start_room):
-        pass
+        self.start_room = start_room
 		
     def next_room(self, room_name):
-	    pass 
+        val = Map.rooms.get(room_name)
+        return val
 		
     def opening_room(self):
-	    pass 
+        return self.next_room(self.start_room) 
 		
 a_map = Map('bedroom')
 a_game = Engine(a_map)
-
-test = OrnateRoom()
-test.enter()
+a_game.play()
