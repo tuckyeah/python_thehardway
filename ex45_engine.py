@@ -2,8 +2,11 @@ from sys import exit
 from random import randint
 
 class Room(object):
-
-    def enter(self):
+    def __init__(self):
+		self.following_room = 'bedroom'
+	
+    
+	def enter(self):
 	    print "This shouldn't show up ever, since this is just our base class."
 	    exit(1)
 
@@ -20,7 +23,7 @@ class Engine(object):
         last_room = self.room_map.next_room('finished')
 
         while current_room != last_room:
-            next_room_name = current_room.enter()
+            next_room_name = current_room.following_room
             current_room = self.room_map.next_room(next_room_name)
 
         current_room.enter()
