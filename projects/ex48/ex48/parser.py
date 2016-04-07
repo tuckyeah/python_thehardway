@@ -1,5 +1,6 @@
 import lexicon
 from sys import exit 
+import parser_class
 
 class ParserError(Exception):
     pass
@@ -12,7 +13,7 @@ class Sentence(object):
 		self.verb = verb[1]
 		self.object = obj[1]
 		
-    
+
 def peek(word_list):
     #checks if we have given it a variable
     #does NOT check for no variable 
@@ -44,56 +45,72 @@ def skip(word_list, word_type):
     while peek(word_list) == word_type:
         match(word_list, word_type)
 
-	
-def parse_verb(word_list):
-    skip(word_list, 'stop')
-	
-    if peek(word_list) == 'verb':
-        return match(word_list, 'verb')
-    else:
-        raise ParserError("Expected a verb next.")
+
+class Parser(object):
+		
+    def parse_verb(self, word_list):
+        skip(word_list, 'stop')
+        next_word = peek(word_list)
+
+        if next_word == 'verb':
+            return match(word_list, 'verb')
+        elif next_word == 'error':
+            problem_word = word_list[0]
+            get_user_input(problem_word)		
+        else:
+            raise ParserError("Expected a verb next.")
 
  
-def parse_object(word_list):
-    skip(word_list, 'stop')
-    next_word = peek(word_list)
+    def parse_object(self, word_list):
+        skip(word_list, 'stop')
+        next_word = peek(word_list)
 
-    if next_word == 'noun':
-        return match(word_list, 'noun')
-    elif next_word == 'direction':
-        return match(word_list, 'direction')
-    elif next_word == 'error':
-        problem_word = word_list[1]
-        get_user_input(problem_word)		
-    else:
-        raise ParserError("Expected a noun or direction next.")
+        if next_word == 'noun':
+            return match(word_list, 'noun')
+        elif next_word == 'direction':
+            return match(word_list, 'direction')
+        elif next_word == 'number':
+            return match(word_list, 'number')
+        elif next_word == 'error':
+            problem_word = word_list[0]
+            get_user_input(problem_word)		
+        else:
+            raise ParserError("Expected a noun or direction next.")
 
 
-def parse_subject(word_list):
-    skip(word_list, 'stop')
-    next_word = peek(word_list)
+    def parse_subject(self, word_list):
+        skip(word_list, 'stop')
+        next_word = peek(word_list)
 
-    if next_word == 'noun':
-        return match(word_list, 'noun')
-    elif next_word == 'verb':
-        return ('noun', 'player')
-    elif next_word == 'error':
-        problem_word = word_list[1]
-        get_user_input(problem_word)		
-    else:
-        raise ParserError("Expected a verb next.")
+        if next_word == 'noun':
+            return match(word_list, 'noun')
+        elif next_word == 'verb':
+            return ('noun', 'player')
+        elif next_word == 'error':
+            problem_word = word_list[0]
+            get_user_input(problem_word)		
+        else:
+            raise ParserError("Expected a verb next.")
 	
+	
+    def parse_sentence(self, word_list):
+        subj = self.parse_subject(word_list)
+        verb = self.parse_verb(word_list)
+        obj = self.parse_object(word_list)
 
-def parse_sentence(word_list):
-    subj = parse_subject(word_list)
-    verb = parse_verb(word_list)
-    obj = parse_object(word_list)
+        return Sentence(subj, verb, obj)    
 
-    return Sentence(subj, verb, obj)
 
 def scan_sentence(ans):
-    scanned = lexicon.scan(ans)
-    sentence = parse_sentence(scanned)
+    scanned_phrase = lexicon.scan(ans)
+    
+    if len(scanned_phrase) <= 1:
+       print "Not enough words! Try again"
+       get_user_input()
+    
+    parsed_phrase = Parser()
+    sentence = parsed_phrase.parse_sentence(scanned_phrase)
+    
     print sentence.subject
     print sentence.verb
     print sentence.object
@@ -104,8 +121,5 @@ def get_user_input(*arg):
         print "I don't understand %s, try again" % arg
     ans =  raw_input("Type a sentence > ")
     scan_sentence(ans)
-#i need to create a check for user input
-#that makes sure it has the right number of words
-#and that there are no errors
 
 get_user_input()
