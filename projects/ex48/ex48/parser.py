@@ -1,3 +1,6 @@
+import lexicon
+from sys import exit 
+
 class ParserError(Exception):
     pass
 
@@ -21,6 +24,9 @@ def peek(word_list):
 			
     
 def match(word_list, expecting):
+    # pops the tuple and then works with that
+	# this is basically a way to remove the tuple from the sentence
+	# so we can keep moving forward
     if word_list:
         word = word_list.pop(0)
 
@@ -33,10 +39,12 @@ def match(word_list, expecting):
 			
     
 def skip(word_list, word_type):
+# skips all words in a given category (usually 'stop')
+# this does not RETURN anything - it just alters the Sentence tuple list
     while peek(word_list) == word_type:
-         match(word_list, word_type)
-			
-    
+        match(word_list, word_type)
+
+	
 def parse_verb(word_list):
     skip(word_list, 'stop')
 	
@@ -54,6 +62,9 @@ def parse_object(word_list):
         return match(word_list, 'noun')
     elif next_word == 'direction':
         return match(word_list, 'direction')
+    elif next_word == 'error':
+        problem_word = word_list[1]
+        get_user_input(problem_word)		
     else:
         raise ParserError("Expected a noun or direction next.")
 
@@ -66,6 +77,9 @@ def parse_subject(word_list):
         return match(word_list, 'noun')
     elif next_word == 'verb':
         return ('noun', 'player')
+    elif next_word == 'error':
+        problem_word = word_list[1]
+        get_user_input(problem_word)		
     else:
         raise ParserError("Expected a verb next.")
 	
@@ -75,4 +89,23 @@ def parse_sentence(word_list):
     verb = parse_verb(word_list)
     obj = parse_object(word_list)
 
-    return Sentence(subj, verb, obj)		
+    return Sentence(subj, verb, obj)
+
+def scan_sentence(ans):
+    scanned = lexicon.scan(ans)
+    sentence = parse_sentence(scanned)
+    print sentence.subject
+    print sentence.verb
+    print sentence.object
+    exit(1)
+
+def get_user_input(*arg):
+    if arg:
+        print "I don't understand %s, try again" % arg
+    ans =  raw_input("Type a sentence > ")
+    scan_sentence(ans)
+#i need to create a check for user input
+#that makes sure it has the right number of words
+#and that there are no errors
+
+get_user_input()

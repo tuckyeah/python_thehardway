@@ -26,8 +26,6 @@ def scan(sentence):
                 word_type = 'number'
             except ValueError: # if it's not an integer, assume not found in lexicon; return error.
                 word_type = 'error'
-				
         tokens.append( (word_type, word) )
 
     return tokens
-
