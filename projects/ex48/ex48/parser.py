@@ -11,6 +11,8 @@ class Sentence(object):
 		
     
 def peek(word_list):
+    #checks if we have given it a variable
+    #does NOT check for no variable 
     if word_list:
         word = word_list[0]
         return word[0]
