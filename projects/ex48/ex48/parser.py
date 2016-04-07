@@ -46,60 +46,60 @@ def skip(word_list, word_type):
         match(word_list, word_type)
 
 
-class Parser(object):
-		
-    def parse_verb(self, word_list):
-        skip(word_list, 'stop')
-        next_word = peek(word_list)
 
-        if next_word == 'verb':
-            return match(word_list, 'verb')
-        elif next_word == 'error':
-            problem_word = word_list[0]
-            get_user_input(problem_word)		
-        else:
-            raise ParserError("Expected a verb next.")
+def parse_verb(word_list):
+    skip(word_list, 'stop')
+    next_word = peek(word_list)
+
+    if next_word == 'verb':
+        return match(word_list, 'verb')
+    elif next_word == 'error':
+        problem_word = word_list[0]
+        get_user_input(problem_word)		
+    else:
+        raise ParserError("Expected a verb next.")
 
  
-    def parse_object(self, word_list):
-        skip(word_list, 'stop')
-        next_word = peek(word_list)
+def parse_object(word_list):
+    skip(word_list, 'stop')
+    next_word = peek(word_list)
 
-        if next_word == 'noun':
-            return match(word_list, 'noun')
-        elif next_word == 'direction':
-            return match(word_list, 'direction')
-        elif next_word == 'number':
-            return match(word_list, 'number')
-        elif next_word == 'error':
-            problem_word = word_list[0]
-            get_user_input(problem_word)		
-        else:
-            raise ParserError("Expected a noun or direction next.")
+    if next_word == 'noun':
+        return match(word_list, 'noun')
+    elif next_word == 'direction':
+        return match(word_list, 'direction')
+    elif next_word == 'number':
+        return match(word_list, 'number')
+    elif next_word == 'error':
+        problem_word = word_list[0]
+        get_user_input(problem_word)		
+    else:
+        raise ParserError("Expected a noun or direction next.")
 
 
-    def parse_subject(self, word_list):
-        skip(word_list, 'stop')
-        next_word = peek(word_list)
+def parse_subject(word_list):
+    skip(word_list, 'stop')
+    next_word = peek(word_list)
 
-        if next_word == 'noun':
-            return match(word_list, 'noun')
-        elif next_word == 'verb':
-            return ('noun', 'player')
-        elif next_word == 'error':
-            problem_word = word_list[0]
-            get_user_input(problem_word)		
-        else:
-            raise ParserError("Expected a verb next.")
+    if next_word == 'noun':
+        return match(word_list, 'noun')
+    elif next_word == 'verb':
+        return ('noun', 'player')
+    elif next_word == 'error':
+        problem_word = word_list[0]
+        get_user_input(problem_word)		
+    else:
+        raise ParserError("Expected a verb next.")
 	
 	
-    def parse_sentence(self, word_list):
-        subj = self.parse_subject(word_list)
-        verb = self.parse_verb(word_list)
-        obj = self.parse_object(word_list)
+def parse_sentence(word_list):
+    subj = parse_subject(word_list)
+    verb = parse_verb(word_list)
+    obj = parse_object(word_list)
 
-        return Sentence(subj, verb, obj)    
+    return Sentence(subj, verb, obj)    
 
+# user input & scanning sentences 
 
 def scan_sentence(ans):
     scanned_phrase = lexicon.scan(ans)
@@ -122,4 +122,4 @@ def get_user_input(*arg):
     ans =  raw_input("Type a sentence > ")
     scan_sentence(ans)
 
-get_user_input()
+# get_user_input() call removed for nosetests
