@@ -7,7 +7,7 @@ def assert_response(resp, contains=None, matches=None, headers=None, status="200
 
     if status == "200":
         assert resp.data, "Response data is empty."
-	
+
     if contains:
         assert contains in resp.data, "Response does not contain %r" % contains
 
