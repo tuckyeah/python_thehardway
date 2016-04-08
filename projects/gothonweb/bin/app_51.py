@@ -19,18 +19,19 @@ render = web.template.render('templates/')
 
 class Index(object):
 #GET functions can be passed around and indexed
-
+#POST functions submit a request that DOES something (eg charge a credit card)
     def GET(self):
 	    # web.input gets data from the browser.
 		# it takes key=value set as a default, parses '?name=Frank' part of the URL
 		# and returns an object
-        return render.hello_form()
+        form = web.input(name="Nobody", greet=None)
 
-#POST functions submit a request that DOES something (eg charge a credit card)
-    def POST(self):
-        form = web.input(name="Nobody", greet="Hello")
-        greeting = "%s, %s" % (form.greet, form.name)
-        return render.index(greeting = greeting)
-    
+        if form.greet:
+            greeting = "%s, %s" % (form.greet, form.name)
+            return render.index(greeting = greeting)
+        else:
+            return "ERROR: greet is required."
+        
+	
 if __name__ == "__main__":
     app.run()
