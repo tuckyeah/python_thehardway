@@ -15,7 +15,8 @@ app = web.application(urls, globals())
 
 # create variable 'render,' which is a web.template.render object
 # it knows to take html files from 'templates/' directory because we gave it as a parameter
-render = web.template.render('templates/')
+# the 'base' tells lpthw to use the layout.html as the base template for all others
+render = web.template.render('templates/', base="layout")
 
 class Index(object):
 #GET functions can be passed around and indexed
