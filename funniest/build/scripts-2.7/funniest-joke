@@ -1,0 +1,4 @@
+#!/usr/local/opt/python/bin/python2.7
+
+import funniest
+print funniest.joke()
