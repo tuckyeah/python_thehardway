@@ -6,7 +6,24 @@ def test_room():
     assert_equal(bridge.name, "The Bridge")
     assert_equal(bridge.paths, {'throw the bomb': generic_death,
                               'slowly place the bomb': escape_pod})
-	
+
+    escape = escape_pod
+    assert_equal(escape.name, "Escape Pod")
+    assert_equal(escape.paths, {'2': the_end_winner,
+                                '*': the_end_loser})
+
+def test_winner():
+    winner = the_end_winner
+    assert_equal(the_end_winner.name, "The End")
+    assert_equal(the_end_winner.description, """
+You jump into pod 2 and hit the eject button.
+The pod easily slides out into space heading to
+the planet below. As it flies to the planet, you look
+back and see your ship implode and explode like a
+bright star, taking out the Gothon ship at the same
+time.  You won!
+""")
+
 def test_room_paths():
     central = central_corridor
     laser = laser_weapon_armory

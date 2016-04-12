@@ -93,7 +93,7 @@ do you take?
 the_end_winner = Room("The End",
 """
 You jump into pod 2 and hit the eject button.
-THe pod easily slides out into space heading to
+The pod easily slides out into space heading to
 the planet below. As it flies to the planet, you look
 back and see your ship implode and explode like a
 bright star, taking out the Gothon ship at the same
