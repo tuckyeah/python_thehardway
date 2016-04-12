@@ -17,7 +17,8 @@ def assert_response(resp, contains=None, matches=None, headers=None, status="200
 
     if headers:
         assert_equal(resp.headers, headers)
-		
+
+# gets Cookie id hash for current session (used for testing)	
 def get_session_id(resp):
     cookies_str = resp.headers['Set-Cookie']
     if cookies_str:

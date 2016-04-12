@@ -11,6 +11,8 @@ def test_index():
     resp = app.request("/game")
     assert_response(resp)
 
+    # this doesn't work - it doesn't test for the POST data, but it does
+    # pass with a '303' status
     data = {'action': 'shoot!'}
     resp = app.request("/game", method="POST", data=data)
     assert_response(resp, status = '303 See Other')

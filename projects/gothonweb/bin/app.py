@@ -1,10 +1,13 @@
 import web
 from gothonweb import map
 
+web.config.debug = False
 
 urls = (
     '/game', 'GameEngine',
     '/', 'Index',
+    '/count', 'count',
+    '/reset', 'reset'
 )
 
 app = web.application(urls, globals())
@@ -12,7 +15,7 @@ app = web.application(urls, globals())
 # little hack so that debug mode works with sessions
 if web.config.get('_session') is None:
     store = web.session.DiskStore('sessions')
-    session = web.session.Session(app, store, initializer={'room':None})
+    session = web.session.Session(app, store, initializer={'room':None, 'count': 0})
     web.config._session = session
 else:
     session = web.config._session
@@ -24,6 +27,7 @@ class Index(object):
     def GET(self):
         #this is used to 'setup' the session with starting values
         session.room = map.START
+        # sends HTTP code 303 with new location, browser performs GET on location
         web.seeother("/game")
 
 
@@ -45,6 +49,16 @@ class GameEngine(object):
 
         web.seeother("/game")
 
+class count(object):
+    def GET(self):
+        session.count += 1
+        return str(session.count)
+
+
+class reset(object):
+    def GET(self):
+        session.kill()
+        return ""
 		
 if __name__ == "__main__":
     app.run()
