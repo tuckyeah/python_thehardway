@@ -34,7 +34,7 @@ class GameEngine(object):
             return render.show_room(room=session.room)
         else:
         #why is this here? do you need it?
-        return render.you_died()
+            return render.you_died()
 		
     def POST(self):
         form = web.input(action=None)
@@ -42,7 +42,7 @@ class GameEngine(object):
         #there is a bug here, can you fix it?
         if session.room and form.action:
             session.room = session.room.go(form.action)
-            return session.room
+            return render.show_room(session.room) 
 
         web.seeother("/game")
 		
