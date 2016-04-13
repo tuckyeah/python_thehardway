@@ -44,8 +44,16 @@ class GameEngine(object):
         form = web.input(action=None)
 
         #there is a bug here, can you fix it?
+        # if we enter a wrong solution, it returns us to the you_died page
+        # rather than sending us to the appropriate death page
         if session.room and form.action:
-            session.room = session.room.go(form.action)
+            transition = session.room.go(form.action)
+            if transition == None:
+                transition = session.room.go('*')
+            if transition != None:
+                session.room = transition
+            else: 
+                session.room = None
 
         web.seeother("/game")
 
