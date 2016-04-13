@@ -2,10 +2,17 @@ from nose.tools import *
 from gothonweb.map import *
 from gothonweb.transitions import *
 
+QUIPS = [
+    "You died. You kinda suck at this.",
+    "Your mom would be proud... if she were smarter.",
+    "Such a loser.",
+    "I have a small puppy that's better than this."
+]
+
 def test_room():
     bridge = the_bridge
     assert_equal(bridge.name, "The Bridge")
-    assert_equal(bridge.paths, {'throw the bomb': generic_death,
+    assert_equal(bridge.paths, {'throw the bomb': bridge_death,
                               'slowly place the bomb': escape_pod})
 
     escape = escape_pod
@@ -36,12 +43,12 @@ def test_room_paths():
 	
     assert_equal(laser.paths, {
         '0132': the_bridge,
-        '*': generic_death})
+        '*': law_death})
 
 def test_deaths():
-    death_type = generic_death.description
-    assert(death_type in QUIPS)
-    assert(generic_death.description in QUIPS)
+    death_test = Death("You Suck")
+    assert(death_test.quip in QUIPS)
+    assert_equal(death.description, "You Suck")
 	
 def test_gothon_game_map():
     assert_equal(START.go('shoot!'), shoot_transition)

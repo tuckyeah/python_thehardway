@@ -46,6 +46,7 @@ class GameEngine(object):
         #there is a bug here, can you fix it?
         # if we enter a wrong solution, it returns us to the you_died page
         # rather than sending us to the appropriate death page
+        # but i think this fixed it
         if session.room and form.action:
             transition = session.room.go(form.action)
             if transition == None:

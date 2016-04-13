@@ -41,7 +41,7 @@ the_bridge = Room("The Bridge", bridge_initial_description)
 
 escape_pod = Room("Escape Pod", pod_initial_description)
 
-
+#add a winner / loser page
 the_end_winner = Room("The End",
 """
 You jump into pod 2 and hit the eject button.
@@ -72,6 +72,7 @@ law_death = Death(law_wrong_code)
 
 bridge_death = Death(bridge_throw_death)
 
+#add paths for each room
 escape_pod.add_paths({
     '2': the_end_winner,
     '*': the_end_loser
