@@ -1,5 +1,6 @@
 from nose.tools import *
 from gothonweb.map import *
+from gothonweb.transitions import *
 
 def test_room():
     bridge = the_bridge
@@ -29,8 +30,8 @@ def test_room_paths():
     laser = laser_weapon_armory
 	
     assert_equal(central.paths, {
-        'shoot!': generic_death,
-        'dodge!': generic_death,
+        'shoot!': shoot_transition,
+        'dodge!': dodge_transition,
         'tell a joke': laser_weapon_armory})
 	
     assert_equal(laser.paths, {
@@ -43,8 +44,8 @@ def test_deaths():
     assert(generic_death.description in QUIPS)
 	
 def test_gothon_game_map():
-    assert_equal(START.go('shoot!'), generic_death)
-    assert_equal(START.go('dodge!'), generic_death)
+    assert_equal(START.go('shoot!'), shoot_transition)
+    assert_equal(START.go('dodge!'), dodge_transition)
 
     room = START.go('tell a joke')
     assert_equal(room, laser_weapon_armory)

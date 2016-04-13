@@ -1,4 +1,5 @@
 from random import randint 
+from transitions import *
 
 class Room(object):
 
@@ -12,27 +13,15 @@ class Room(object):
 
     def add_paths(self, paths):
         self.paths.update(paths)
-	
+
 QUIPS = [
     "You died. You kinda suck at this.",
     "Your mom would be proud... if she were smarter.",
     "Such a loser.",
     "I have a small puppy that's better than this."
 	]
-	
-central_corridor = Room("Central Corridor", 
-"""
-The Gothons of Planet Percal #25 have invaded your ship and destroyed
-your entire crew. You are the last survivng member and your last
-mission is to get the neutron destruct bomb from the Weapons Armory,
-put it in the bridge, and blow the ship up after getting into an 
-escape pod.
 
-You're running down the central corridor to the Weapons Armory when
-a Gothon jumps out, red scaly skin, dark grimy teeth, and evil clown costume
-flowing around his hate-filled body. He's blocking the door to the 
-Armory and about to pull a weapon to blast you.
-""")
+central_corridor = Room("Central Corridor", cc_initial_description)
 
 
 laser_weapon_armory = Room("Laser Weapon Armory", 
@@ -128,8 +117,8 @@ laser_weapon_armory.add_paths({
 })
 
 central_corridor.add_paths({
-    'shoot!': generic_death,
-    'dodge!': generic_death,
+    'shoot!': shoot_transition,
+    'dodge!': dodge_transition,
     'tell a joke': laser_weapon_armory
 })
 
