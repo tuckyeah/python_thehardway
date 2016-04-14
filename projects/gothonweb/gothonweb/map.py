@@ -1,5 +1,13 @@
 from random import randint 
 from transitions import *
+from help import *
+
+HINTS = {
+    'Central Corridor': cc_hint,
+    'Laser Weapon Armory': law_hint,
+    'The Bridge': bridge_hint,
+    'Escape Pod': escape_hint
+}
 
 class Room(object):
 
@@ -18,7 +26,8 @@ class Room(object):
     def counter(self):
         self.counter += 1
 
-
+    def get_hint(self):
+        return HINTS.get(self.name)
 
 class Death(Room):
 
@@ -73,6 +82,8 @@ the_bridge.add_paths({
     'slowly place the bomb': escape_pod
 })
 
+#in a perfect world, i'd love to have a way to show which numbers
+# people got right in their guess...
 laser_weapon_armory.add_paths({
     '0132': the_bridge,
     '*': law_death

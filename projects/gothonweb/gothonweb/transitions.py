@@ -1,9 +1,5 @@
 import map
 
-# each path with a wrong choice should lead to its own appropriate description
-# the add path function can go in here
-# and then we can do the fetching based on the user input in app.py?
-
 # CENTRAL CORRIDOR
 
 cc_initial_description = """

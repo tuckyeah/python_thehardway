@@ -16,6 +16,9 @@ $if room.name == "death" or room.name == "The End":
     <p><a href="/">Play Again?</a></p>
 $else:
     <p>
+
+    <button type="button" onclick="alert('$room.get_hint()')">Hint</button>
+
     <form action="/game" method="POST">
         - <input type="text" name="action"> <input type="SUBMIT" value="Go!">
 	</form>
