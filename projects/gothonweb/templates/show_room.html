@@ -7,13 +7,16 @@ $else:
 
 <pre>
 $room.description
+
+$if room.name == "Laser Weapon Armory":
+    <em>Tries so far: $room.counter</em>
 </pre>
 
-$if room.name == "death":
+$if room.name == "death" or room.name == "The End":
     <p><a href="/">Play Again?</a></p>
 $else:
     <p>
     <form action="/game" method="POST">
-        - <input type="text" name="action"> <input type="SUBMIT">
+        - <input type="text" name="action"> <input type="SUBMIT" value="Go!">
 	</form>
 	</p>

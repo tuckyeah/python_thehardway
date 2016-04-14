@@ -7,12 +7,18 @@ class Room(object):
         self.name = name
         self.description = description
         self.paths = {}
+        self.counter = 0
 	
     def go(self, direction):
         return self.paths.get(direction, None)
 
     def add_paths(self, paths):
         self.paths.update(paths)
+
+    def counter(self):
+        self.counter += 1
+
+
 
 class Death(Room):
 
