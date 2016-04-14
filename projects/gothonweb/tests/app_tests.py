@@ -8,7 +8,7 @@ def test_index():
     assert_response(resp, status = "303 See Other")
 	
 	#check first GET request to /game
-    resp = app.request("/game")
+    resp = app.request("/game", method="GET")
     assert_response(resp)
 
     # this doesn't work - it doesn't test for the POST data, but it does

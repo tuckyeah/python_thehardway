@@ -42,25 +42,9 @@ the_bridge = Room("The Bridge", bridge_initial_description)
 escape_pod = Room("Escape Pod", pod_initial_description)
 
 #add a winner / loser page
-the_end_winner = Room("The End",
-"""
-You jump into pod 2 and hit the eject button.
-The pod easily slides out into space heading to
-the planet below. As it flies to the planet, you look
-back and see your ship implode and explode like a
-bright star, taking out the Gothon ship at the same
-time.  You won!
-""")
+the_end_winner = Room("The End", winner_text)
 
-
-the_end_loser = Room("The End", 
-"""
-You jump into a random pod and hit the eject button.
-The pod escapes out into the void of space, then
-implodes as the hull ruptures, curshing your body
-into jam jelly.
-"""
-)
+the_end_loser = Room("The End", loser_text)
 
 # creating objects for each room's deaths
 generic_death = Death("you died.")

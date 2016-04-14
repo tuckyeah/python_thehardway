@@ -43,14 +43,15 @@ class GameEngine(object):
     def POST(self):
         form = web.input(action=None)
 
-        #there is a bug here, can you fix it?
-        # if we enter a wrong solution, it returns us to the you_died page
-        # rather than sending us to the appropriate death page
-        # but i think this fixed it
+        # checks if the value passsed to the form matches 
+        # if not, sets 'transition' to the 'other' value ('*')
+        # otherwise, the page doesn't recognize wrong values
         if session.room and form.action:
             transition = session.room.go(form.action)
             if transition == None:
                 transition = session.room.go('*')
+            # this needs to be it's own separate statement, otherwise 
+            # we get caught in a loop
             if transition != None:
                 session.room = transition
             else: 

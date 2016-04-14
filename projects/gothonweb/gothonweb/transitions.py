@@ -113,3 +113,21 @@ now need to pick one to take. Some of them could be damaged
 but you don't have time to look. There's 5 pods, which one
 do you take?
 """
+
+# THE END
+
+winner_text = """
+You jump into pod 2 and hit the eject button.
+The pod easily slides out into space heading to
+the planet below. As it flies to the planet, you look
+back and see your ship implode and explode like a
+bright star, taking out the Gothon ship at the same
+time.  You won!
+"""
+
+loser_text = """
+You jump into a random pod and hit the eject button.
+The pod escapes out into the void of space, then
+implodes as the hull ruptures, curshing your body
+into jam jelly.
+"""
