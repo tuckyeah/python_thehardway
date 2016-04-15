@@ -1,6 +1,5 @@
 from random import randint 
 from transitions import *
-from help import *
 
 HINTS = {
     'Central Corridor': cc_hint,
@@ -56,10 +55,12 @@ the_bridge = Room("The Bridge", bridge_initial_description)
 
 escape_pod = Room("Escape Pod", pod_initial_description)
 
-#add a winner / loser page
+
 the_end_winner = Room("The End", winner_text)
 
+
 the_end_loser = Room("The End", loser_text)
+
 
 # creating objects for each room's deaths
 generic_death = Death("you died.")
@@ -70,6 +71,7 @@ cc_dodge_death = Death(cc_dodge_transition)
 law_death = Death(law_wrong_code)
 
 bridge_death = Death(bridge_throw_death)
+
 
 #add paths for each room
 escape_pod.add_paths({
@@ -82,7 +84,7 @@ the_bridge.add_paths({
     'slowly place the bomb': escape_pod
 })
 
-#in a perfect world, i'd love to have a way to show which numbers
+# in a perfect world, i'd love to have a way to show which numbers
 # people got right in their guess...
 laser_weapon_armory.add_paths({
     '0132': the_bridge,
