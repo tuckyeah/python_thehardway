@@ -42,6 +42,9 @@ class GameEngine(object):
 		
     def POST(self):
         form = web.input(action=None)
+        #if we want to make a check for entries, we'll need
+        # to change using the go method here, and use something else
+        # like 'check', and then 'go'
 
         # checks if the value passsed to the form matches 
         # if not, sets 'transition' to the 'other' value ('*')

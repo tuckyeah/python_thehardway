@@ -28,6 +28,9 @@ class Room(object):
     def get_hint(self):
         return HINTS.get(self.name)
 
+    def check(self, input):
+        pass
+
 class Death(Room):
 
     quips = [
