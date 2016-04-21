@@ -1,5 +1,5 @@
 WORD_TYPES = {
-'verb': ['take', 'throw', 'place', 'shoot', 'dodge', 'tell'],
+'verb': ['take', 'throw', 'place', 'shoot', 'dodge', 'tell', 'enter', 'try'],
 'noun': ['bomb', 'joke', 'gun', 'bullet'],
 'stop': ['the', 'a', 'it', 'from', 'at', 'of']
 }

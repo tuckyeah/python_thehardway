@@ -38,5 +38,6 @@ def test_scan_sentence():
 	assert_equal(sentence.verb, 'throw')
 	assert_equal(sentence.object, 'bomb')
 
-	sentence = scan_sentence('1234')
-	assert_equal(sentence.verb, '1234')
+	sentence = scan_sentence('enter 1234')
+	assert_equal(sentence.verb, 'enter')
+	assert_equal(sentence.object, 1234)

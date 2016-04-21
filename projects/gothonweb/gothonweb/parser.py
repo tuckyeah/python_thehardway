@@ -35,6 +35,13 @@ def skip(word_list, word_type):
 		match(word_list, word_type)
 
 
+# i should probably take these out of a class
+# since I need to break them up anyway, and vary the tests depending on
+# our input...
+
+# if we get a one word answer, check if it's in verbs, otherwise bail
+# or check if it's a number, otherwise bail
+
 
 class Parser(object):
 
