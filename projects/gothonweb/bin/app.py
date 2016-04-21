@@ -42,14 +42,15 @@ class GameEngine(object):
 		
     def POST(self):
         form = web.input(action=None)
-        #if we want to make a check for entries, we'll need
-        # to change using the go method here, and use something else
-        # like 'check', and then 'go'
+        #check for entries using check
+        # try: check
+        #if parsererror, print i don't understand
+        # else handle normally
 
         # checks if the value passsed to the form matches 
         # if not, sets 'transition' to the 'other' value ('*')
         # otherwise, the page doesn't recognize wrong values
-        if session.room and form.action:
+        if session.room and session.room.check(form.action):
             transition = session.room.go(form.action)
             if transition == None:
                 if session.room.name == "Laser Weapon Armory" and session.room.counter < 5:
@@ -66,16 +67,21 @@ class GameEngine(object):
 
         web.seeother("/game")
 
+
 class count(object):
+    
     def GET(self):
         session.count += 1
         return str(session.count)
 
 
 class reset(object):
+    
     def GET(self):
         session.kill()
         return ""
+
+
 		
 if __name__ == "__main__":
     app.run()

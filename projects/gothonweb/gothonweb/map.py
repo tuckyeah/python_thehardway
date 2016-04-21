@@ -1,5 +1,8 @@
 from random import randint 
 from transitions import *
+from lexicon import *
+from parser import ParserError
+import parser
 
 HINTS = {
     'Central Corridor': cc_hint,
@@ -28,8 +31,13 @@ class Room(object):
     def get_hint(self):
         return HINTS.get(self.name)
 
-    def check(self, input):
-        pass
+    def check(self, ans):
+        sentence = parser.scan_sentence(ans)
+
+        for key in self.paths:
+            if sentence.verb in key or sentence.object in key:
+                return True
+        return False
 
 class Death(Room):
 
@@ -95,8 +103,8 @@ laser_weapon_armory.add_paths({
 })
 
 central_corridor.add_paths({
-    'shoot!': cc_shoot_death,
-    'dodge!': cc_dodge_death,
+    'shoot gun': cc_shoot_death,
+    'dodge bullet': cc_dodge_death,
     'tell a joke': laser_weapon_armory
 })
 

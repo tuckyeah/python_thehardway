@@ -44,6 +44,8 @@ class Parser(object):
 
 		if next_word == 'verb':
 			return match(word_list, 'verb')
+		elif next_word == 'number':
+			return match(word_list, 'number')
 		elif next_word == 'error':
 			problem_word = word_list[0]
 			get_user_input(problem_word)
@@ -70,7 +72,7 @@ class Parser(object):
 
 		if next_word == 'noun':
 			return match(word_list, 'noun')
-		elif next_word == 'verb':
+		elif next_word == 'verb' or next_word == 'number':
 			return ('noun', 'player')
 		elif next_word == 'error':
 			problem_word = word_list[0]
@@ -90,6 +92,7 @@ def scan_sentence(ans):
 
 	parsed_phrase = Parser()
 	sentence = parsed_phrase.parse_sentence(scanned_phrase)
+	return sentence
 
 # so, we need to scan the sentence from the user 
 # and in the returned sentence object, confirm that the returned

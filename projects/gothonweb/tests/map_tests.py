@@ -15,8 +15,8 @@ def test_room():
     assert_equal(centralcorridor.name, "Central Corridor")
     assert_equal(centralcorridor.description, cc_initial_description)
     assert_equal(centralcorridor.paths, {
-        'shoot!': cc_shoot_death,
-        'dodge!': cc_dodge_death,
+        'shoot gun': cc_shoot_death,
+        'dodge bullet': cc_dodge_death,
         'tell a joke': laser_weapon_armory
         })
 
@@ -78,8 +78,8 @@ def test_death():
 
 
 def test_gothon_game_map():
-    assert_equal(START.go('shoot!'), cc_shoot_death)
-    assert_equal(START.go('dodge!'), cc_dodge_death)
+    assert_equal(START.go('shoot gun'), cc_shoot_death)
+    assert_equal(START.go('dodge bullet'), cc_dodge_death)
 
     room = START.go('tell a joke')
     assert_equal(room, laser_weapon_armory)
@@ -98,3 +98,10 @@ def test_gothon_game_map():
 
     assert_equal(escape.go('2'), the_end_winner)
     assert_equal(escape.go('7'), None)
+
+def test_check():
+    centralcorridor = central_corridor
+
+    assert_equal(centralcorridor.check("shoot gun"), True)
+    assert_equal(centralcorridor.check("dodge bullet"), True)
+    assert_raises(ParserError, centralcorridor.check, "dodge")
