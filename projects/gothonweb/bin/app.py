@@ -58,6 +58,9 @@ class GameEngine(object):
                 if session.room.name == "Laser Weapon Armory" and session.room.counter < 5:
                     session.room.counter += 1
                     transition = session.room
+                elif session.room.name != "Laser Weapon Armory" and not session.room.check(form.action):
+                    session.room.errors = True
+                    transition = session.room
                 else:
                     transition = session.room.go('*')
             

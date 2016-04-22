@@ -95,7 +95,7 @@ escape_pod.add_paths({
 
 the_bridge.add_paths({
     'throw the bomb': bridge_death,
-    'slowly place the bomb': escape_pod
+    'place bomb': escape_pod
 })
 
 # in a perfect world, i'd love to have a way to show which numbers
