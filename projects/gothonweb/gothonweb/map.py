@@ -18,6 +18,7 @@ class Room(object):
         self.description = description
         self.paths = {}
         self.counter = 0
+        self.errors = False
 	
     def go(self, direction):
         return self.paths.get(direction, None)
@@ -31,12 +32,14 @@ class Room(object):
     def get_hint(self):
         return HINTS.get(self.name)
 
+   #checks that the answer works for that specific room.
     def check(self, ans):
         sentence = parser.scan_sentence(ans)
 
         for key in self.paths:
             if sentence.verb in key or sentence.object in key:
                 return True
+        
         return False
 
 class Death(Room):
@@ -105,7 +108,7 @@ laser_weapon_armory.add_paths({
 central_corridor.add_paths({
     'shoot gun': cc_shoot_death,
     'dodge bullet': cc_dodge_death,
-    'tell a joke': laser_weapon_armory
+    'tell joke': laser_weapon_armory
 })
 
 START = central_corridor

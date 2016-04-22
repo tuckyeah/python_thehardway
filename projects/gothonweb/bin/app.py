@@ -50,14 +50,17 @@ class GameEngine(object):
         # checks if the value passsed to the form matches 
         # if not, sets 'transition' to the 'other' value ('*')
         # otherwise, the page doesn't recognize wrong values
-        if session.room and session.room.check(form.action):
+        if session.room and form.action:
+
             transition = session.room.go(form.action)
+            
             if transition == None:
                 if session.room.name == "Laser Weapon Armory" and session.room.counter < 5:
                     session.room.counter += 1
                     transition = session.room
                 else:
                     transition = session.room.go('*')
+            
             # this needs to be it's own separate statement, otherwise 
             # we get caught in a loop
             if transition != None:

@@ -99,9 +99,10 @@ def test_gothon_game_map():
     assert_equal(escape.go('2'), the_end_winner)
     assert_equal(escape.go('7'), None)
 
+
 def test_check():
     centralcorridor = central_corridor
 
-    assert_equal(centralcorridor.check("shoot gun"), True)
-    assert_equal(centralcorridor.check("dodge bullet"), True)
-    assert_raises(ParserError, centralcorridor.check, "dodge")
+    assert(centralcorridor.check('shoot gun'))
+    assert_equal(centralcorridor.check('dodge bullet'), True)
+    assert_equal(centralcorridor.check('throw bomb'), False)

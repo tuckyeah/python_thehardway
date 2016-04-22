@@ -10,7 +10,12 @@ $room.description
 
 $if room.name == "Laser Weapon Armory":
     <em>Tries so far: $room.counter</em>
+
+$if room.errors:
+    <p>I didn't understand some of those words... try again.</p>
 </pre>
+
+
 
 $if room.name == "death" or room.name == "The End":
     <p><a href="/">Play Again?</a></p>
