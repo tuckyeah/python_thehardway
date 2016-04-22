@@ -42,7 +42,7 @@ def parse_verb(word_list):
 	if next_word == 'verb':
 		return match(word_list, 'verb')
 	elif next_word == 'number':
-		return match(str(word_list), 'number')
+		return match(word_list, 'number')
 	elif next_word == 'error':
 		problem_word = word_list[0]
 		return problem_word
@@ -56,7 +56,7 @@ def parse_object(word_list):
 	if next_word == 'noun':
 		return match(word_list, 'noun')
 	elif next_word == 'number':
-		return match(str(word_list), 'number')
+		return match(word_list, 'number')
 	elif next_word == 'error':
 		problem_word = word_list[0]
 		return problem_word
@@ -96,7 +96,7 @@ def scan_sentence(ans):
 	if len(scanned_phrase) == 1:
 		word_type = scanned_phrase.pop(0)
 		if word_type[0] == 'number':
-			return Sentence(('noun', 'player'), ('verb', 'enter'), str(word_type))
+			return Sentence(('noun', 'player'), ('verb', 'enter'), ('number', str(word_type[1])))
 		elif word_type[0] == 'verb':
 			return Sentence(('noun', 'player'), word_type, ('object', 'object'))
 	else:

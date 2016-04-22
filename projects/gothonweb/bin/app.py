@@ -42,17 +42,13 @@ class GameEngine(object):
 		
     def POST(self):
         form = web.input(action=None)
-        #check for entries using check
-        # try: check
-        #if parsererror, print i don't understand
-        # else handle normally
 
         # checks if the value passsed to the form matches 
         # if not, sets 'transition' to the 'other' value ('*')
         # otherwise, the page doesn't recognize wrong values
         if session.room and form.action:
 
-            transition = session.room.go(form.action)
+            transition = session.room.get_room(form.action)
             
             if transition == None:
                 if session.room.name == "Laser Weapon Armory" and session.room.counter < 5:

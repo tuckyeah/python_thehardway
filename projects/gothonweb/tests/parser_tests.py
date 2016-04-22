@@ -38,4 +38,4 @@ def test_scan_sentence():
 
 	sentence = scan_sentence('1234')
 	assert_equal(sentence.verb, 'enter')
-	assert_equal(sentence.object, 1234)
+	assert_equal(sentence.object, '1234')

@@ -17,7 +17,7 @@ def test_room():
     assert_equal(centralcorridor.paths, {
         'shoot gun': cc_shoot_death,
         'dodge bullet': cc_dodge_death,
-        'tell a joke': laser_weapon_armory
+        'tell joke': laser_weapon_armory
         })
 
     laser = laser_weapon_armory
@@ -34,8 +34,8 @@ def test_room():
     assert_equal(bridge.name, "The Bridge")
     assert_equal(bridge.description, bridge_initial_description)
     assert_equal(bridge.paths, {
-        'throw the bomb':  bridge_death,
-        'slowly place the bomb': escape_pod
+        'throw bomb':  bridge_death,
+        'place bomb': escape_pod
         })
 
     escape = escape_pod
@@ -81,7 +81,7 @@ def test_gothon_game_map():
     assert_equal(START.go('shoot gun'), cc_shoot_death)
     assert_equal(START.go('dodge bullet'), cc_dodge_death)
 
-    room = START.go('tell a joke')
+    room = START.go('tell joke')
     assert_equal(room, laser_weapon_armory)
 
     lasers = laser_weapon_armory
@@ -91,8 +91,8 @@ def test_gothon_game_map():
 
     bridge = the_bridge
 
-    assert_equal(bridge.go('throw the bomb'), bridge_death)
-    assert_equal(bridge.go('slowly place the bomb'), escape_pod)
+    assert_equal(bridge.go('throw bomb'), bridge_death)
+    assert_equal(bridge.go('place bomb'), escape_pod)
 
     escape = escape_pod
 

@@ -33,14 +33,28 @@ class Room(object):
         return HINTS.get(self.name)
 
    #checks that the answer works for that specific room.
+
     def check(self, ans):
-        sentence = parser.scan_sentence(ans)
+        sentence = self.parser(ans)
 
         for key in self.paths:
             if sentence.verb in key or sentence.object in key:
+                # returns the room value for the dictionary
                 return True
         
         return False
+
+    def parser(self, ans):
+        return parser.scan_sentence(ans)
+
+    def get_path(self, ans):
+        sentence = self.parser(ans)
+
+        for key, value in self.paths:
+            if sentence.verb in key or sentence.object in key:
+                return value
+
+        return None
 
 class Death(Room):
 
@@ -94,7 +108,7 @@ escape_pod.add_paths({
 })
 
 the_bridge.add_paths({
-    'throw the bomb': bridge_death,
+    'throw bomb': bridge_death,
     'place bomb': escape_pod
 })
 
